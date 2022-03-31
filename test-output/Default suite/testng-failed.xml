@@ -5,8 +5,8 @@
     <classes>
       <class name="Admin.User_Management">
         <methods>
-          <include name="DSCL_Admin_UserManagement_64"/>
           <include name="openBrowser"/>
+          <include name="DSCL_Admin_UserManagement_13" invocation-numbers="0"/>
           <include name="afterClass"/>
         </methods>
       </class> <!-- Admin.User_Management -->

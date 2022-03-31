@@ -446,13 +446,23 @@ public class City_GIS {
 	  Actions action = new Actions(driver);
 	  action.moveByOffset(853,450).click().perform();
 	  Thread.sleep(6000);
+		File file = new File("C:\\Users\\meet.g\\Downloads");
+	  	for (File file1:file.listFiles() )
+	  	{ 
+	  		if
+	  		(file1.getName().startsWith("boundary_municipal")&& file1.getName().endsWith(".xls")) {
+	  	    file1.delete();}
+	    }
+	
 	  ExtentTestManager.getTest().log(Status.INFO, "<b>Step-5:</b> Click on Download option from the feature info Pop-up.");
 	  driver.findElement(By.xpath(City_GIS_R.btn_Download)).click();
 	  ExtentTestManager.getTest().log(Status.INFO, "<b>Step-6:</b> Click on Download option from the feature info Pop-up.");
 	  driver.findElement(By.xpath(City_GIS_R.lnk_XLS_Download)).click();
+	  Thread.sleep(4000);
 	  ExtentTestManager.getTest().log(Status.INFO, "<b>Result:</b> User should able to download the all details in selected file format.");
-	  File f = new File("C:\\Users\\meet.g\\Downloads\\boundary_municipal (6).xls"); 
-	  f.exists();
+	  File f = new File("C:\\Users\\meet.g\\Downloads\\boundary_municipal.xls"); 
+	  Assert.assertEquals(true,  f.exists());
+		
   }
   
   @Test(priority=22, description="To verify that user is able to perform pan functionality on City GIS map.")
@@ -681,11 +691,12 @@ public class City_GIS {
 	  driver.findElement(By.xpath(City_GIS_R.btn_Swipe_Layer)).click();
 	  ExtentTestManager.getTest().log(Status.INFO, "<b>Step-10:</b> Click on OK button from the pop-up of swipe.");
 	  driver.findElement(By.xpath(City_GIS_R.btn_ok_swipe_popup)).click();
-	  ExtentTestManager.getTest().log(Status.INFO, "<b>Result:</b> Selected layer should be swipe as per mouse moves on map.");
+	  ExtentTestManager.getTest().log(Status.INFO, "<b>Result:</b> 1) \"Stop Swipe\" pop-up should close.\r\n"
+	  		+ "2) \"Swipe\" functionality should stopped.");
 	  Assert.assertEquals(false,  driver.findElement(By.xpath(City_GIS_R.dialog_swipe_popup)).isDisplayed());
   }
   
-  @Test(priority=30, description="To verify that user is able to stop swipe tool from the City GIS map.")
+  @Test(priority=30, description="To verify that user is able to close popup of the start/stop swipe by layer functionality.")
   public void DSCL_CityGIS_30() throws InterruptedException, AWTException {
 	  ExtentTestManager.getTest().log(Status.INFO, "<b>Step-1:</b> Click on CITY GIS button from the menu bar.");
 	  driver.findElement(By.xpath(Home_Page_R.btn_City_GIS)).click();
@@ -1535,13 +1546,13 @@ public class City_GIS {
 	  ExtentTestManager.getTest().log(Status.INFO, "<b>Step-7:</b> Click on Minus(-) icon. ");
 	  driver.findElement(By.xpath(City_GIS_R.btn_collapse_Ward_Inf)).click();
 	  Thread.sleep(2000);
-	  ExtentTestManager.getTest().log(Status.INFO, "<b>Result:</b> User should get Ward Info pop-up in collapse mode.");
+	  ExtentTestManager.getTest().log(Status.INFO, "<b>Result:</b> \"Ward Information\" dialog should collapse/expand as per selection.");
 	  Assert.assertEquals(true, driver.findElement(By.xpath(City_GIS_R.btn_expand_Ward_Inf)).isDisplayed());
 	  objs.Screenshot(driver, Classname ,method.getName()+"_"+1 );
 	  ExtentTestManager.getTest().log(Status.INFO, "<b>Step-8:</b> Click on Plus(+) icon. ");
 	  driver.findElement(By.xpath(City_GIS_R.btn_expand_Ward_Inf)).click();
 	  Thread.sleep(2000);
-	  ExtentTestManager.getTest().log(Status.INFO, "<b>Result:</b> User should get Ward Info pop-up in collapse mode.");
+	  ExtentTestManager.getTest().log(Status.INFO, "<b>Result:</b> \"Ward Information\" dialog should collapse/expand as per selection.");
 	  Assert.assertEquals(true, driver.findElement(By.xpath(City_GIS_R.btn_collapse_Ward_Inf)).isDisplayed());  
   }
   
@@ -1565,10 +1576,10 @@ public class City_GIS {
 	  Thread.sleep(2000);
 	  ExtentTestManager.getTest().log(Status.INFO, "<b>Step-6:</b> Click on Go option. ");
 	  driver.findElement(By.xpath(City_GIS_R.btn_Go_Ward_Inf)).click();
-	  ExtentTestManager.getTest().log(Status.INFO, "<b>Step-7:</b> To verify that user is able to Close Ward Info pop-up.");
+	  ExtentTestManager.getTest().log(Status.INFO, "<b>Step-7:</b> Click on close button.");
 	  driver.findElement(By.xpath(City_GIS_R.btn_Close_Ward_Inf)).click();
 	  Thread.sleep(2000);
-	  ExtentTestManager.getTest().log(Status.INFO, "<b>Result:</b> User should get expanded  screen for ward details.");
+	  ExtentTestManager.getTest().log(Status.INFO, "<b>Result:</b> Click on close button.");
 	  Assert.assertEquals(false, driver.findElement(By.xpath(City_GIS_R.label_Ward_Information)).isDisplayed());
   }
   
